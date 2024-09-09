@@ -1,20 +1,27 @@
 package com.jeonpeace.memo.user.service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jeonpeace.memo.common.MD5HashingEncoder;
+import com.jeonpeace.memo.common.HashingEncoder;
+import com.jeonpeace.memo.user.domain.User;
 import com.jeonpeace.memo.user.repository.UserRepository;
 
 @Service
 public class UserService {
 
+	// IOC : 제어의 역전
+	// DI(Dependency Injection) : 의존성 주입
 	private UserRepository userRepository;
+	
+	private HashingEncoder encoder;
 	
 	// 생성자가 autowired를 위한 것 하나만 존재하는 경우 autowired 생략
 //	@Autowired
-	private UserService(UserRepository userRepository) {
+	private UserService(UserRepository userRepository, @Qualifier("md5Hashing") HashingEncoder encoder) {
 		this.userRepository = userRepository;
+		this.encoder = encoder;
 	}
 	
 	public int addUser(String loginId
@@ -23,9 +30,18 @@ public class UserService {
 					, String email) {
 		
 		// 암호화
-		String encryptPassword = MD5HashingEncoder.encode(password);
+		String encryptPassword = encoder.encode(password);
 		
 		return userRepository.insertUser(loginId, encryptPassword, name, email);
+	}
+	
+	public User getUser(String loginId, String password) {
+		
+		String encryptPassword = encoder.encode(password);
+		
+		User user = userRepository.selectUser(loginId, encryptPassword);
+		
+		return user;
 	}
 	
 }

@@ -3,20 +3,16 @@ package com.jeonpeace.memo.common;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-// Spring bean에 동록하기 위한 annotation
-// primary 의존성 우선 순위 부여
-//@Primary
-@Component("md5Hashing")
-public class MD5HashingEncoder implements HashingEncoder{
+@Component("sha256Hashing")
+public class SHA256HashingEncoder implements HashingEncoder{
 
 	public String encode(String message) {
-	
+		
 		String result = "";
 		try {
-			MessageDigest messageDigest = MessageDigest.getInstance("md5");
+			MessageDigest messageDigest = MessageDigest.getInstance("sha256");
 			
 			byte[] bytes = message.getBytes();
 			
