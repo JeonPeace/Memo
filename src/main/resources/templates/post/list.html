@@ -4,6 +4,29 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layouts/default}">
         
-        
+       <section layout:fragment="contents" class="contents d-flex justify-content-center">
+            <div class="post-box my-5">
+                <h1 class="text-center">메모 리스트</h1>
+                <table class="table text-center mt-5">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>제목</th>
+                            <th>작성 시간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="memo, status:${memoList}">
+                            <td th:text="${memo.id}">NoTest</td>
+                            <td><a th:href="@{/post/detail-view(id=${memo.id})}" th:text="${memo.title}">titleTest</a></td>
+                            <td th:text="${#temporals.format(memo.createdAt, 'yyyy-MM-dd HH:mm')}">dateTimeTest</td>
+                        <tr>                      
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-end mt-5">
+                    <a href="/post/create-view" class="btn btn-secondary">메모 쓰기</a>
+                </div>
+            </div>
+        </section>
         
 </html>
