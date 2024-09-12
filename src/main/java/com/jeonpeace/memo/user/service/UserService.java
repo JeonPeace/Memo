@@ -44,4 +44,17 @@ public class UserService {
 		return user;
 	}
 	
+	public boolean checkDuplicate(String loginId) {
+		
+		int count = userRepository.checkDuplicate(loginId);
+		
+		if(count == 0) {
+			// 중복 안됨
+			return false;
+		}else {
+			// 중복됨
+			return true;
+		}
+	}
+	
 }

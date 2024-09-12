@@ -16,4 +16,5 @@ public interface UserRepository {
 	public User selectUser(@Param("loginId") String loginId
 						, @Param("password") String password);
 	
+	public int checkDuplicate(@Param("loginId") String loginId);
 }
