@@ -6,20 +6,25 @@
         
         <section layout:fragment="contents" class="contents d-flex justify-content-center">
             <div class="input-box my-5 p-5 rounded-lg">
+            <form id="loginForm">
                 <h2 class="text-center">로그인</h2>
                 <input type="text" placeholder="아이디를 입력하세요" class="form-control mt-4" id="loginIdInput">
                 <input type="password" placeholder="비밀번호를 입력하세요" class="form-control mt-2" id="passwordInput">
-                <button type="button" class="btn btn-secondary btn-block mt-3" id="loginBtn">로그인</button>           
+                <button type="submit" class="btn btn-secondary btn-block mt-3" id="loginBtn">로그인</button>
+            </form>
+            <div class="mt-4 text-center">
+                아이디가 없으신가요? <a href="/user/join-view">회원가입</a>
+            </div>
             </div>
         </section>
         
         <script layout:fragment="script">
             $(document).ready(function(){
             	
-            	$("#loginBtn").on("click", function(){
+            	$("#loginForm").on("submit", function(e){
             		
             		// 이벤트가 가진 기본 기능을 취소시키기
-            	
+            	    e.preventDefault();
             		
             		let loginId = $("#loginIdInput").val();
             		let password = $("#passwordInput").val();

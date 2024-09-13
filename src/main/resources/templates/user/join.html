@@ -7,20 +7,23 @@
         <section layout:fragment="contents" class="contents d-flex justify-content-center">
             <div class="input-box my-5 p-5 rounded-lg">
                 <h2 class="text-center">회원가입</h2>
-                <div class="d-flex">
-	                <input type="text" placeholder="아이디" class="form-control mt-4" id="idInput">
-	                <button type="button" class="btn btn-secondary mt-4 btn-block" id="duplicateBtn">중복확인</button>        
-                </div>
-                <div>
-                    <span class="text-danger d-none" id="duplicateText">중복된 Id 입니다.</span>
-                    <span class="text-info d-none" id="availableText">사용 가능한 Id 입니다.</span>
-                </div>
-                <input type="password" placeholder="비밀번호" class="form-control mt-2" id="passwordInput">
-                <input type="password" placeholder="비밀번호 확인" class="form-control mt-2" id="passwordConfirmInput">
-                <input type="text" placeholder="이름" class="form-control mt-2" id="nameInput">
-                <input type="text" placeholder="이메일 주소" class="form-control mt-2" id="emailInput">
-                <button type="button" class="btn btn-secondary btn-block mt-3" id="joinBtn">가입</button>
-                <div>
+                
+                <form id="joinForm">
+	                <div class="d-flex">
+		                <input type="text" placeholder="아이디" class="form-control mt-4" id="idInput">
+		                <button type="button" class="btn btn-secondary mt-4 btn-block" id="duplicateBtn">중복확인</button>        
+	                </div>
+	                <div>
+	                    <span class="text-danger d-none" id="duplicateText">중복된 Id 입니다.</span>
+	                    <span class="text-info d-none" id="availableText">사용 가능한 Id 입니다.</span>
+	                </div>
+	                <input type="password" placeholder="비밀번호" class="form-control mt-2" id="passwordInput">
+	                <input type="password" placeholder="비밀번호 확인" class="form-control mt-2" id="passwordConfirmInput">
+	                <input type="text" placeholder="이름" class="form-control mt-2" id="nameInput">
+	                <input type="text" placeholder="이메일 주소" class="form-control mt-2" id="emailInput">
+	                <button type="submit" class="btn btn-secondary btn-block mt-3" id="joinBtn">가입</button>
+                </form>
+                <div class="mt-4 text-center">
                     <span>이미 아이디가 있으신가요? <a href="/user/login-view">로그인</a></span>
                 </div>
             </div>
@@ -75,7 +78,9 @@
 	        		
 	        	});
 	        	
-	            $("#joinBtn").on("click", function(){
+	        	$("#joinForm").on("submit", function(e){
+	        		
+	        		e.preventDefault();
 	            	
 	            	let id = $("#idInput").val();
 	            	let password = $("#passwordInput").val();

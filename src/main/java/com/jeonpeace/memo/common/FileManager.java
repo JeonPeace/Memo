@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileManager {
 
 	// 상수
-	public static final String FILE_UPLOAD_PATH = "D:\\jeonpeace\\springProject\\upload\\memo/";
+	public static final String FILE_UPLOAD_PATH = "D:\\jeonpeace\\springProject\\upload\\memo";
 	
 	// 파일 저장
 	public static String saveFile(int userId, MultipartFile file) {
@@ -27,7 +27,7 @@ public class FileManager {
 		// UNIX TIME: 1970년 1월 1일부터 흐른 시간을 mili second(1/1000초)로 표현한 값
 		// ex) 2_938091328
 		
-		String directoryName = userId + "_" + System.currentTimeMillis();
+		String directoryName = "/" + userId + "_" + System.currentTimeMillis();
 		
 		// 폴더 생성
 		String directoryPath = FILE_UPLOAD_PATH + directoryName;
@@ -56,7 +56,7 @@ public class FileManager {
 		// 파일 저장 결로 : "D:\\jeonpeace\\springProject\\upload\\memo/2_8120980/test.png";
 		// URL path : /images/2_8120980/test.png
 		
-		return "/images/" + directoryName + "/" + file.getOriginalFilename();
+		return "/images" + directoryName + "/" + file.getOriginalFilename();
 		
 	}
 	
